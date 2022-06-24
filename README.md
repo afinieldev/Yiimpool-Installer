@@ -1,120 +1,122 @@
-<h1 align="center"> Afiniel.Tech Yiimpool Installer v2.0🚀
+<p>
+    <h1 align="center"> Afiniel-Tech YiimPool Installer v3.0 - Dev Branch! </h1><b>Afiniel.Tech YiimPool Installer </b>Is an install script that will do all the magic for you to get your yiimp server up in no time.  It is a fork of <a href="https://github.com/cryptopool-builders/Multi-Pool-Installer "> Multi-Pool-Installer</a> by CryptoPool Builders. Since it looks like they have stop maintaining it, So we fork it and YiimPool got born to keep this script up to date and alive!
+</p>
+<br/>
+</>
+<b> The installer requires the following. </b>
+</>
+</p>
+<p>
 
-###  :information_source: This is the main page for the Afiniel.Tech Yiimpool
-Here you find information all documentation about Afiniel.Tech Yiimpool Installer v2.0  Will mostly automatically install all reequirements to get Yiimp installed correctly. This is a fork of Cryptopool.builders multipool installer, i cant see that the project is active anymore and there for i have start a "Reborn of the project"
+* Fresh Ubuntu 18.04 or Ubuntu 16.04
+* Minimum RAM 4GB
+* Recommended RAM 8GB
+* for best performance, use a dedicated server
 
-### The installer requires the following
+<br/>
+<p>
+    <h1 aling="left"> Installation. </h1>
 
-* Fresh Ubuntu 16.04 or Ubuntu 18.04
-* Minimum RAM 4GB.
-* Recommended RAM 8GB or higher.
+<b>To start the installation, copy the line below and paste it in your terminal. use the same line to update when new release is out! </b>
 
-If you have any questions please contact us on discord  <a href="https://discord.gg/GVZ4tchkKc"><img src="https://img.shields.io/discord/904564600354254898.svg?style=flat&label=Discord %3C3%20&color=7289DA%22" alt="Join Community Badge"/></a>  You can also open request on github
+</p>
+<pa>
 
-## :information_source: Table of Contents
+> <code>curl https://raw.githubusercontent.com/afinieldev/Yiimpool-Installer/master/bootstrap.sh | bash</code>
 
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Information](#-information)
-- [Commands](#-commands)
-- [Credits](#-credits)
-- [License](#-license)
-- [Support](#-support)
+* Information about the user
+  
+  >* If you are running as root the installer will prompt you to create a new account.
+<br/>
+   >* If you have a user account created on your server that account must already be part of the sudo group.
+<br/>
+<p>
+<br/>
+    <h2 aling="left"> IMPORTANT! </h2>
 
-## 💾 Installation
+    > After creating the new user account or updating your existing account, you MUST reboot the machine in order for the accounts permissions to be updated properly.
 
-### :warning: READ THIS 
+ when you have rebooted, you log back into your new user account. and run the following command.
 
-You <b>MUST RUN</b> the <b>yiimpool</b> installer under <b>root</b> or an existing <b>account</b>. If you have an existing <b>account</b> then make sure that the account have <b>sudo permissions.</b>
+> yiimpool
+</p>
+<br/>
+<p>
+    <h1 aling="left"> YiiMP Install questions </h1>
 
- To start the installation paste the following in your terminal and follow the instructions. Yiimpool installer will ask you to create a new account.
-```
-curl https://raw.githubusercontent.com/Afiniel-tech/Yiimpool-Installer/master/bootstrap.sh | bash
-```
+The Yiimp Single Server Install is recommend for private pools. It is recommended to have at least 4GB ram in order to function properly.
+Setup is automated after the following questions are answered:
 
- When the account is created yiimpool will ask you to reboot the system. When the system is rebooted log back in with the new account then you type following command to continue:
-```
-yiimpool
-```
+| Question                                      |                Default                 | Help                                                                    |
+| :-------------------------------------------- | :------------------------------------: | :---------------------------------------------------------------------- |
+| Are you using a domain name                   |                   no                   | If you plan to use something like example.com, make sure DNS is updated |
+| Are you using a sub-domain as the main domain |                   no                   | If you plan to use something like pool.example.com                      |
+| Domain Name                                   |               localhost                | Change to your domain either example.com or pool.example.com            |
+| Stratum Domain                                |          stratum.domain.name           | This should be something other then your domain name                    |
+| Install SSL                                   |                  yes                   | Installs a 90 day cert from LetsEncrypt                                 |
+| Support Email                                 |             root@localhost             | Used to send you system alerts                                          |
+| Your Public IP                                | pulls ip last used to acess web server | To verify go to http://www.whatsmyip.org                                |
+| DB Root Password                              |  autogenerated 36 character password   | Default mysql root password                                             |
+| DB Panel User Password                        |  autogenerated 36 character password   | Default mysql frontend password                                         |
+| DB Stratum Password                           |  autogenerated 36 character password   | Default mysql stratum password                                          |
+| Admin Portal Access Location                  |              AdminPortal               | to access example.com/site/AdminPortal                                  |
 
-### To upgrade when an new version is available you run:
+* Some information.
+  
+  >* Installation will take some time  to fully complete. You will get a message on the screen letting you know it has finished.
+<br/>
+<p>
+<br/>
+    <h2 aling="center"> A server reboot is REQUIRED after the installer is completed to finalize the installation process! </h2>
 
-```
-curl https://raw.githubusercontent.com/Afiniel-tech/Yiimpool-Installer/master/bootstrap.sh | bash
-```
+`On first reboot it may take some minutes before the cron screens auto-start. After waiting some minutes type:`
+<br/>
+<br/>
+> <code>motd</code>
+<br/>
+<p>
+    <h4 aling="center"> To help make your server more secure we have changed the install locations and directory structure of YiiMP as follows:</h3>
+<br/>
+</p>
+<p>
 
-## ⚙️ Information
+| Directory                                 |                            Files                            |
+| :---------------------------------------- | :---------------------------------------------------------: |
+| /home/yiimp-data/yiimp                    |             General install location for YiiMP              |
+| /home/yiimp-data/yiimp/starts             | screens and stratum sh files - you do not need to run these |
+| /home/yiimp-data/yiimp/site               |                              -                              |
+| /home/yiimp-data/yiimp/site/web           |              New location for YiiMP web files               |
+| /home/yiimp-data/yiimp/site/backup        |                backup location for mysql DB                 |
+| /home/yiimp-data/yiimp/site/configuration |            New location of your serverconfig.php            |
+| /home/yiimp-data/yiimp/site/crons         |      New location of the `main:blocks:loop2` sh files       |
+| /home/yiimp-data/yiimp/site/log           |    New location for debug.log and your nginx server log     |
+| /home/yiimp-data/yiimp/site/stratum       |             New location for your stratum files             |
+| /home/yiimp-data/wallets                  |                  New location for wallets                   |
+<br/>
+> Permissions have been setup correctly allowing your main user write acess to the /home/yiimp-data directories! Changing file or directory permissions after install will cause your YiiMP to not function correctly, you have been warned!!
+<br/>
+<br/>
+> By default even though all stratum algos start on server start, the ports have been blocked by the firewall. To open a port type: `sudo ufw allow <port>` to run this installer again just type: `yiimpool`
+<br/>
+<br/>
+</p>
+<br/>
+<p>
+    <h1 aling="center"> Your Yiimp server is now ready for duty! </h1>
+    <br/>
+    From there your YiiMP Single Server installation is fully completed. You can now go to example.com/site/AdminPortal to access your admin section and start adding your coins.
+    <br/>
+    <br/>
+    <h2 aling="left"> Commands </h2>
+    <br/>
 
-### The Yiimpool installer will ask you the following
-
-Question | Default | Help
-:--|:-:|:--
-Are you using a domain name | no | If you plan to use something like example.com, make sure DNS is updated
-Are you using a sub-domain as the main domain | no | If you plan to use something like pool.example.com
-Domain Name | localhost | Change to your domain either example.com or pool.example.com
-Stratum Domain | stratum.domain.name | This should be something other then your domain name
-Install SSL | yes | Installs a 90 day cert from LetsEncrypt
-Support Email | root@localhost | Used to send you system alerts
-Your Public IP | pulls ip last used to acess web server | To verify go to http://www.whatsmyip.org
-DB Root Password | autogenerated 36 character password | Default mysql root password
-DB Panel User Password | autogenerated 36 character password | Default mysql frontend password
-DB Stratum Password | autogenerated 36 character password | Default mysql stratum password
-Admin Portal Access Location | AdminPortal | to access example.com/site/AdminPortal
-
-Installation will take approximately 25 minutes. The installer will let you know when the installation is complete.
-
-### A server reboot is REQUIRED after the installation is fully completed to finalize the installation process
-
-After rebooting the server log back in to your user account you have created, when the rebooting process is complete log in again with your user account again and you have successfully install yiimp on your sever.
-
-
-#### On first reboot it may take up to 1-2 minutes before the cron screens auto-start. After waiting 1-2 minutes type:
-```
-motd
-```
-
-#### To help make your server more secure we have changed the install locations and directory structure of YiiMP as follows:
-
-Directory | Files
-:--|:-:
-/home/crypto-data/yiimp | General install location for YiiMP
-/home/crypto-data/yiimp/starts | screens and stratum sh files - you do not need to run these
-/home/crypto-data/yiimp/site | -
-/home/crypto-data/yiimp/site/web | New location for YiiMP web files
-/home/crypto-data/yiimp/site/backup | backup location for mysql DB
-/home/crypto-data/yiimp/site/configuration | New location of your serverconfig.php
-/home/crypto-data/yiimp/site/crons | New location of the `main:blocks:loop2` sh files
-/home/crypto-data/yiimp/site/log | New location for debug.log and your nginx server log
-/home/crypto-data/yiimp/site/stratum | New location for your stratum files
-/home/crypto-data/wallets | New location for wallets
-
-Permissions have been setup correctly allowing your main user write acess to the /home/crypto-data directories! Changing file or directory permissions after install will cause your YiiMP to not function correctly you have been warned!!
-
-### If you have have not installed with dedicated port.
-
-By default even though all stratum algos start on server start, the ports have been blocked by the firewall. To open a port type:
-```
-sudo ufw allow port number
-```
-If you have installed with dedicated port you just run the following in your terminal to add coin daemon ports.
-```
-addport
-```
-From there your YiiMP installation is fully completed. You can now go to example.com/site/AdminPortal to access your admin section and start adding your coins.
-
-#### 🔗 Commands
-
-To view your running screens run following
-'''
-screen -list
-'''
-To view the screen you run the following
+    To view a screen type:
 ```
 screen -r main|loop2|blocks|debug
 ```
 To detach from a screen type:
 ```
-ctrl+a+d "DONT do: ctrl+c it will kill your screen." 
+ctrl+a+d
 ```
 To start, stop or restart main|loop2|blocks|debug type:
 ```
@@ -124,21 +126,10 @@ We also suggest that you type:
 ```
 yiimp
 ```
-If you have dedicated port installed.
-```
-addport
-```
 and get to know those commands as well!
 
-Permissions have been setup correctly allowing your main user write acess to the /home/crypto-data directories! Changing file or directory permissions after install will cause your YiiMP to not function correctly, you have been warned!!
-
-By default even though all stratum algos start on server start, the ports have been blocked by the firewall. To open a port type:
-```
-sudo ufw allow port number
-```
-You <b>MUST</b> also open the RPC Port number on the daemon server when adding new coins. Failing to open the port will result in a connection time out error.
-
-From there your YiiMP Multi Server installation is fully completed. You can now go to example.com/site/AdminPortal to access your admin section and start adding your coins.
+<p>
+    <h1 aling="center"> Thank you for using YiimPool Installer! </h1>
 
 ## ❤️ Credits
 
@@ -164,3 +155,4 @@ Donations for continued support of this script are welcomed at:
 * Doge: DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h
 * ETH:  0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB
 * LTC:  ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw
+</p>
